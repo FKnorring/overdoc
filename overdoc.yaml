@@ -26,6 +26,8 @@ ignore_directories:
   - ".github"         # GitHub configuration directory
   - ".vscode"         # VS Code configuration directory
   - ".idea"           # IntelliJ IDEA configuration directory
+  - "venv"            # Python virtual environment
+  - ".venv"           # Python virtual environment (alternative name)
   - ".*/"             # Directories starting with .
 
 # Language-specific configuration

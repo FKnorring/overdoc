@@ -22,14 +22,32 @@ pub fn apply_filters(files: Vec<RepoFile>, config: &Config) -> Vec<RepoFile> {
 fn should_ignore_file(file: &RepoFile, config: &Config) -> bool {
     let path = &file.path;
     let file_name = path.file_name().and_then(|n| n.to_str()).unwrap_or("");
+    let path_str = path.to_string_lossy().to_string();
 
-    // DEVELOPMENT CODE: For testing, include our own source files
-    if path.to_string_lossy().contains("src") && file.extension.as_deref() == Some("rs") {
+    // Allow our own source files for development purposes
+    if path_str.contains("src") && file.extension.as_deref() == Some("rs") {
         debug!(
             "Including Rust source file for analysis: {}",
             path.display()
         );
         return false;
+    }
+
+    // Special handling for external Python and TypeScript/JavaScript files
+    if let Some(ext) = &file.extension {
+        let ext_str = ext.as_str();
+        if (ext_str == "py" || ext_str == "ts" || ext_str == "tsx" || ext_str == "js")
+            && !path_str.contains("node_modules")
+            && !path_str.contains("venv")
+            && !path_str.contains(".venv")
+        {
+            debug!(
+                "Including {} file for analysis: {}",
+                ext_str.to_uppercase(),
+                path.display()
+            );
+            return false;
+        }
     }
 
     // Ignore files in dot directories (like .git)

@@ -13,12 +13,12 @@ mod traversal;
 #[derive(Parser, Debug)]
 #[clap(author, version, about)]
 struct Args {
-    /// Path to the repository to analyze
-    #[clap(short, long, default_value = ".")]
+    /// Repository directory to analyze (absolute or relative path)
+    #[clap(short, long, default_value = ".", value_name = "DIRECTORY")]
     repo_path: String,
 
     /// Path to configuration file
-    #[clap(short, long)]
+    #[clap(short, long, value_name = "FILE")]
     config_path: Option<String>,
 
     /// Verbose output
