@@ -15,6 +15,9 @@ ignore_patterns:
   - "*.jpeg"          # JPEG images
   - "*.ico"           # Icon files
   - ".*"              # Filenames starting with .
+  - "*.bundle.js"     # Bundled JavaScript files
+  - "*.chunk.js"      # Chunked JavaScript files
+  - "main-app.js"     # Next.js main app file
 
 # Directory patterns to ignore
 ignore_directories:
@@ -29,6 +32,14 @@ ignore_directories:
   - "venv"            # Python virtual environment
   - ".venv"           # Python virtual environment (alternative name)
   - ".*/"             # Directories starting with .
+  - ".next"           # Next.js build directory (exact match)
+  - ".next/**"        # All files and subdirectories in .next
+  - "**/.next/**"     # All .next directories at any level
+  - "**/out/**"       # Output directories
+  - "**/dist/**"      # Distribution directories at any level
+  - "**/build/**"     # Build directories at any level
+  - "**/node_modules/**" # Node modules at any level
+  - "**/*.next*/**"   # Any directory containing .next
 
 # Language-specific configuration
 languages:
@@ -60,10 +71,14 @@ languages:
     ignore_files:
       - "*.min.js"     # Minified JavaScript
       - "*.bundle.js"  # Bundled JavaScript
+      - "main-app.js"  # Next.js main app file
+      - "*.chunk.js"   # Chunked JavaScript files
     ignore_directories: 
       - "node_modules" # Node.js modules
       - "dist"         # Distribution directory
       - "build"        # Build directory
+      - ".next"        # Next.js build directory
+      - ".next/**"     # All files in .next directory
     import_patterns:
       - "import \\s*[{]?\\s*([\\w,\\s]+)\\s*[}]?\\s*from \\s*['\"]([^'\"]+)['\"]"
       - "require\\(['\"]([^'\"]+)['\"]\\)"
@@ -82,6 +97,8 @@ languages:
       - "node_modules" # Node.js modules
       - "dist"         # Distribution directory
       - "build"        # Build directory
+      - ".next"        # Next.js build directory
+      - ".next/**"     # All files in .next directory
     import_patterns:
       - "import \\s*[{]?\\s*([\\w,\\s]+)\\s*[}]?\\s*from \\s*['\"]([^'\"]+)['\"]"
       - "require\\(['\"]([^'\"]+)['\"]\\)"
