@@ -1,0 +1,110 @@
+# OverDoc Configuration File
+
+# Global ignore patterns for all languages
+ignore_patterns:
+  - "*.min.*"         # Minified files
+  - "*.map"           # Source maps
+  - "*.lock"          # Lock files
+  - ".gitignore"      # Git ignore files
+  - ".git/*"          # Git directory files
+  - "LICENSE"         # License files
+  - "*.md"            # Markdown files (except README.md)
+  - "*.svg"           # SVG files
+  - "*.png"           # PNG images
+  - "*.jpg"           # JPG images
+  - "*.jpeg"          # JPEG images
+  - "*.ico"           # Icon files
+  - ".*"              # Filenames starting with .
+
+# Directory patterns to ignore
+ignore_directories:
+  - "node_modules"    # Node.js modules
+  - "target"          # Rust build directory
+  - "dist"            # Distribution directory
+  - "build"           # Build directory
+  - ".git"            # Git directory
+  - ".github"         # GitHub configuration directory
+  - ".vscode"         # VS Code configuration directory
+  - ".idea"           # IntelliJ IDEA configuration directory
+  - ".*/"             # Directories starting with .
+
+# Language-specific configuration
+languages:
+  rust:
+    extensions:
+      - "rs"
+    ignore_files:
+      - "build.rs"     # Build scripts
+    ignore_directories:
+      - "target"       # Rust build output
+    import_patterns:
+      - "use\\s+([\\w:]+)"
+      - "use\\s+[\\w:]+\\s*::\\s*\\{([^}]+)\\}"
+      - "extern crate\\s+(\\w+)"
+    export_patterns:
+      - "pub\\s+fn\\s+(\\w+)"
+      - "pub\\s+struct\\s+(\\w+)"
+      - "pub\\s+enum\\s+(\\w+)"
+      - "pub\\s+trait\\s+(\\w+)"
+      - "pub\\s+mod\\s+(\\w+)"
+      - "pub\\s+type\\s+(\\w+)"
+      - "impl\\s+([\\w<>]+)\\s*\\{"
+      - "pub\\s+const\\s+(\\w+)"
+
+  javascript:
+    extensions:
+      - "js"
+      - "jsx"
+    ignore_files:
+      - "*.min.js"     # Minified JavaScript
+      - "*.bundle.js"  # Bundled JavaScript
+    ignore_directories: 
+      - "node_modules" # Node.js modules
+      - "dist"         # Distribution directory
+      - "build"        # Build directory
+    import_patterns:
+      - "import \\s*[{]?\\s*([\\w,\\s]+)\\s*[}]?\\s*from \\s*['\"]([^'\"]+)['\"]"
+      - "require\\(['\"]([^'\"]+)['\"]\\)"
+    export_patterns:
+      - "export \\s*(default )?\\s*(const|let|var|function|class) \\s*(\\w+)"
+      - "module\\.exports"
+      - "exports\\.([\\w]+)"
+
+  typescript:
+    extensions:
+      - "ts"
+      - "tsx"
+    ignore_files:
+      - "*.d.ts"       # TypeScript declaration files
+    ignore_directories:
+      - "node_modules" # Node.js modules
+      - "dist"         # Distribution directory
+      - "build"        # Build directory
+    import_patterns:
+      - "import \\s*[{]?\\s*([\\w,\\s]+)\\s*[}]?\\s*from \\s*['\"]([^'\"]+)['\"]"
+      - "require\\(['\"]([^'\"]+)['\"]\\)"
+    export_patterns:
+      - "export \\s*(default )?\\s*(const|let|var|function|class|interface|type|enum) \\s*(\\w+)"
+
+  python:
+    extensions:
+      - "py"
+    ignore_files:
+      - "__pycache__"  # Python cache
+      - "setup.py"     # Setup scripts
+    ignore_directories:
+      - "__pycache__"  # Python cache directory
+      - "venv"         # Virtual environment
+      - ".venv"        # Alternative virtual environment
+      - "env"          # Another alternative virtual environment
+    import_patterns:
+      - "import \\s*(\\w+)"
+      - "from \\s*(\\w+) \\s*import"
+    export_patterns:
+      - "def \\s*(\\w+)\\s*\\("
+      - "class \\s*(\\w+)"
+
+# Default settings to apply when language-specific ones aren't provided
+default_settings:
+  include_no_extension: false   # Whether to include files with no extension
+  max_file_size_kb: 1024        # Default file size limit in KB (0 means no limit) 

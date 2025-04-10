@@ -1,0 +1,16 @@
+[package]
+name = "overdoc"
+version = "0.1.0"
+edition = "2021"
+description = "Automatic documentation generator for high-traffic areas of a project"
+
+[dependencies]
+walkdir = "2.4.0"         # For directory traversal
+serde = { version = "1.0", features = ["derive"] }  # For serialization/deserialization
+serde_yaml = "0.9"        # For YAML config files
+ignore = "0.4"            # For .gitignore-style file filtering
+log = "0.4"               # For logging
+env_logger = "0.10"       # For logging setup
+anyhow = "1.0"            # For error handling
+clap = { version = "4.4", features = ["derive"] }  # For command line argument parsing
+regex = "1.10"            # For pattern matching in files
